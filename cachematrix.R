@@ -6,15 +6,15 @@
 
 makeCacheMatrix <- function(x = numeric()) 
 {
-    s <- NULL
+    t <- NULL
     set <- function(y) 
     {
         x <<- y
-        s <<- NULL
+        t <<- NULL
     }
     get <- function() x
-    setsolve <- function(solve) s <<- solve
-    getsolve <- function() s
+    setsolve <- function(solve) t <<- solve
+    getsolve <- function() t
     list(set = set, get = get,
          setsolve = setsolve,
          getsolve = getsolve)
@@ -27,14 +27,14 @@ makeCacheMatrix <- function(x = numeric())
 
 cacheSolve <- function(x, ...) 
 {
-    s <- x$getsolve()
-    if(!is.null(s)) 
+    t <- x$getsolve()
+    if(!is.null(t)) 
     {
         message("getting cached data")
-        return(s)
+        return(t)
     }
     data <- x$get()
-    s <- solve(data, ...)
+    t <- solve(data, ...)
     x$setsolve(s)
-    s
+    t
 }
